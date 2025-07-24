@@ -13,7 +13,7 @@ def my_simple_python_function():
 with DAG(
     dag_id='simple_python_dag',
     start_date=datetime(2023, 1, 1),
-    schedule_interval=None,  # This DAG will only run manually
+    schedule=None,  # This DAG will only run manually
     catchup=False,
     tags=['example', 'python'],
 ) as dag:
