@@ -37,7 +37,7 @@ with DAG(
         new_cluster=new_cluster,
         notebook_task=notebook_task,
     )
-
+ 
     opr_run_now = DatabricksRunNowOperator(
         task_id="run_now",
         databricks_conn_id="databricks",
