@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from airflow.sdk import DAG
+from airflow.models.dag import DAG
 from airflow.providers.standard.operators.empty import EmptyOperator
 
 my_dag = DAG(
