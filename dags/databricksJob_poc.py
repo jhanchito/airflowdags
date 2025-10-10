@@ -6,7 +6,7 @@ default_args = {
 }
 with DAG('databricksJob_poc',
   start_date = datetime(2021, 1, 1),
-  schedule_interval = None,
+  schedule=None,
   default_args = default_args
   ) as dag:
   opr_run_now = DatabricksRunNowOperator(
