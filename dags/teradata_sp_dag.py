@@ -20,7 +20,7 @@ with DAG(
     'teradata_sp_execution',
     default_args=default_args,
     description='A DAG to execute a Teradata Stored Procedure',
-    schedule_interval=None, # Set to None for manual trigger, adjust as needed
+    schedule=None, # Set to None for manual trigger, adjust as needed
     start_date=datetime(2023, 1, 1),
     catchup=False,
     tags=['teradata', 'example'],
