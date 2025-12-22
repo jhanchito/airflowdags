@@ -20,7 +20,7 @@ def test_teradata_connection():
         raise e
 
 with DAG(
-    dag_id='z_test_teradata_connection',
+    dag_id='teradata_validate_conn',
     start_date=datetime(2023, 1, 1),
     schedule=None,
     catchup=False
