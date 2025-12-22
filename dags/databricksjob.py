@@ -22,7 +22,7 @@ notebook_params = {"Variable": 5}
 with DAG(
     "databricks_dag",
     start_date=datetime(2021, 1, 1),
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
     default_args={
         "email_on_failure": False,

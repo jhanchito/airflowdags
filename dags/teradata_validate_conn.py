@@ -22,7 +22,7 @@ def test_teradata_connection():
 with DAG(
     dag_id='z_test_teradata_connection',
     start_date=datetime(2023, 1, 1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False
 ) as dag:
 
