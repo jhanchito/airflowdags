@@ -6,6 +6,6 @@ with DAG('stress_test_teradata_load', start_date=datetime(2023,1,1), schedule='@
     for i in range(50):  # Genera 50 tareas paralelas
         TeradataOperator(
             task_id=f'query_teradata_{i}',
-            teradata_conn_id='teradata_default',
+            teradata_conn_id='teradata',
             sql="CALL PE_PROD_ARQ_DATA.demosp_airflow();" 
         )
