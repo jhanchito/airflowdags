@@ -17,24 +17,26 @@ def cpu_load():
 
 with DAG('stress_test_teradata_load', start_date=datetime(2023,1,1), schedule='@once', catchup=False) as dag:
     
-    # 1. Teradata Tasks (Database Load) - Increased to 100
+    # Combined Loop for Chained Tasks
     for i in range(100):
-        TeradataOperator(
+        # 1. Teradata Task
+        t1 = TeradataOperator(
             task_id=f'query_teradata_{i}',
             teradata_conn_id='teradata',
             sql="CALL PE_PROD_ARQ_DATA.demosp_airflow(1);" 
         )
 
-    # 2. Bash Tasks (Scheduler/Executor/Pod Load) - 100 Tasks
-    for j in range(100):
-        BashOperator(
-            task_id=f'bash_sleep_{j}',
+        # 2. Bash Task
+        t2 = BashOperator(
+            task_id=f'bash_sleep_{i}',
             bash_command='sleep 30'
         )
 
-    # 3. Python Tasks (Worker CPU Load) - 50 Tasks
-    for k in range(50):
-        PythonOperator(
-            task_id=f'python_cpu_{k}',
+        # 3. Python Task
+        t3 = PythonOperator(
+            task_id=f'python_cpu_{i}',
             python_callable=cpu_load
         )
+
+        # Chain the tasks
+        t1 >> t2 >> t3
