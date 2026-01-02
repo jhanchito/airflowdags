@@ -32,5 +32,5 @@ with DAG(
     call_stored_procedure = TeradataOperator(
         task_id='call_stored_procedure',
         teradata_conn_id='teradata',
-        sql='CALL PE_PROD_ARQ_DATA.demosp_airflow();',
+        sql='CALL PE_PROD_ARQ_DATA.demosp_airflow(1);',
     )

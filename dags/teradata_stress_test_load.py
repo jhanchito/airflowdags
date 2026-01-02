@@ -15,7 +15,7 @@ def cpu_load():
             primes.append(num)
     time.sleep(1) # Ensure it takes at least a bit of time
 
-with DAG('stress_test_teradata_load', start_date=datetime(2023,1,1), schedule='@once', catchup=False) as dag:
+with DAG('teradata_stress_test_load', start_date=datetime(2023,1,1), schedule='@once', catchup=False) as dag:
     
     # Combined Loop for Chained Tasks
     for i in range(100):
