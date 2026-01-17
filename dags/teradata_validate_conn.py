@@ -13,7 +13,7 @@ def test_teradata_connection():
         
         # Opcional: Validar versión o una tabla dual
         df = hook.get_pandas_df(sql="SELECT DATABASE;")
-        print(f"Base de datos actual: {df.iloc[0,0]}")
+        print(f"Base de datos actual : {df.iloc[0,0]}")
         
     except Exception as e:
         print(f"Error detectado durante la validación: {e}")
