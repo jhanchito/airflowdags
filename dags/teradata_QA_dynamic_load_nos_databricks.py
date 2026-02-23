@@ -5,17 +5,14 @@ from datetime import datetime
 import random
 # Table and location mapping configuration
 
-random = random.randint(1, 100)
+RANDOM_VAL = random.randint(1, 100)
 TABLE_CONFIG = [
     {
+        "ID_FUENTE" : "M_PlantaClientes",
         "script_table": "select * from pe_prod_lz_data.aldm_subscriber limit 777",
-        "target_location": "/AZ/scacanaliticadev.BLOB.core.windows.net/lakehouse/landing/m_suscrip{random}/"
+        "target_location": f"/AZ/scacanaliticadev.BLOB.core.windows.net/lakehouse/landing/m_suscrip{RANDOM_VAL}/"
     },
     # Add more tables and locations here as needed
-    # {
-    #     "script_table": "select * from another_schema.another_table limit 777",
-    #     "target_location": "/AZ/scacanaliticadev.BLOB.core.windows.net/lakehouse/landing/another_path/"
-    # }
 ]
 
 DATABRICKS_CONN_ID = 'databricksDev'
@@ -28,7 +25,7 @@ default_args = {
 }
 
 with DAG(
-    'teradata_dynamic_load_nos_databricks',
+    'teradata_QA_dynamic_load_nos_databricks',
     default_args=default_args,
     description='Dynamic Teradata WRITE_NOS load followed by Databricks job',
     schedule=None,
@@ -48,11 +45,8 @@ with DAG(
     for i, config in enumerate(TABLE_CONFIG):
         script_table = config['script_table']
         location = config['target_location']
-        # Extract meaningful task ID part (last part of table name)
-        table_name = script_table.split('.')[-1]
-        
         load_task = TeradataOperator(
-            task_id=f'write_nos_{table_name}',
+            task_id=config['ID_FUENTE'],
             teradata_conn_id='teradata',
             sql=f"""
                 SELECT * FROM WRITE_NOS (
