@@ -16,7 +16,7 @@ TABLE_CONFIG = [
 ]
 
 DATABRICKS_CONN_ID = 'databricksDev'
-DATABRICKS_JOB_ID = 828525461039791
+DATABRICKS_JOB_ID = 922393484091429
 
 default_args = {
     'owner': 'airflow',
@@ -39,6 +39,10 @@ with DAG(
         task_id='run_databricks_now',
         databricks_conn_id=DATABRICKS_CONN_ID,
         job_id=DATABRICKS_JOB_ID,
+        notebook_params={
+            "identificadores": "valor1",
+            "ruta": f"{RANDOM_VAL}"
+        }
     )
 
     # Dynamically generate Teradata load tasks
