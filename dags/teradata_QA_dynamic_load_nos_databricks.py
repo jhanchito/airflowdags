@@ -51,7 +51,7 @@ with DAG(
         location = config['target_location']
         load_task = TeradataOperator(
             task_id=config['ID_FUENTE'],
-            teradata_conn_id='teradata',
+            teradata_conn_id='teradata_dev',
             sql=f"""
                 SELECT * FROM WRITE_NOS (
                   ON ({script_table} )
