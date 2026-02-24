@@ -9,7 +9,7 @@ RANDOM_VAL = random.randint(1, 100)
 TABLE_CONFIG = [
     {
         "ID_FUENTE" : "M_PlantaClientes",
-        "script_table": "select * from pe_prod_lz_data.aldm_subscriber limit 777",
+        "script_table": "select TOP 777 * from pe_prod_lz_data.aldm_subscriber",
         "target_location": f"/AZ/scacanaliticadev.BLOB.core.windows.net/lakehouse/landing/m_suscrip{RANDOM_VAL}/"
     },
     # Add more tables and locations here as needed
@@ -54,7 +54,7 @@ with DAG(
             teradata_conn_id='teradata_dev',
             sql=f"""
                 SELECT * FROM WRITE_NOS (
-                  ON ({script_table} )
+                  ON ({script_table})
                   USING
                     LOCATION('{location}')
                     AUTHORIZATION(nos_usr.token_datalab_landing)
