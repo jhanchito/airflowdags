@@ -9,7 +9,7 @@ RANDOM_VAL = random.randint(1, 100)
 TABLE_CONFIG = [
     {
         "ID_FUENTE" : "M_PlantaClientes",
-        "script_table": "select TOP 777 * from pe_prod_lz_data.aldm_subscriber",
+        "script_table": "select * from pe_prod_lz_data.aldm_subscriber where SUBSCRIBER_STATUS_KEY = 2266",
         "target_location": f"/AZ/scacanaliticadev.BLOB.core.windows.net/lakehouse/landing/m_suscrip{RANDOM_VAL}/"
     },
     # Add more tables and locations here as needed
